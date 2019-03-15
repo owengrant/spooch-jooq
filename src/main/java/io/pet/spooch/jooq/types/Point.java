@@ -5,14 +5,14 @@
  */
 package io.pet.spooch.jooq.types;
 
-import io.github.jklingsporn.vertx.jooq.shared.async.JsonPojo;
 import io.vertx.core.json.JsonArray;
+import io.github.jklingsporn.vertx.jooq.shared.JsonType;
 
 /**
  *
  * @author Anala
  */
-public class Point extends org.postgis.Point implements JsonPojo{
+public class Point extends org.postgis.Point implements JsonType{
     
     public Point(org.postgis.Point val){
         x = val.x;
@@ -27,7 +27,7 @@ public class Point extends org.postgis.Point implements JsonPojo{
     }
     
     @Override
-    public JsonArray toJson(){
+    public JsonArray toType(){
         return new JsonArray().add(x).add(y);
     }
     

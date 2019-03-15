@@ -5,18 +5,17 @@
  */
 package io.pet.spooch.jooq;
 
-import io.github.jklingsporn.vertx.jooq.generate.classic.ClassicAsyncVertxGenerator;
+import io.github.jklingsporn.vertx.jooq.generate.classic.ClassicReactiveVertxGenerator;
 import io.pet.spooch.jooq.types.Point;
 import org.jooq.codegen.JavaWriter;
 import org.jooq.meta.TypedElementDefinition;
 import java.time.LocalDateTime;
-import io.vertx.core.json.JsonArray;
 
 /**
  *
  * @author Owen Grant
  */
-public class Generator extends ClassicAsyncVertxGenerator{
+public class Generator extends ClassicReactiveVertxGenerator{
      @Override
     protected boolean handleCustomTypeFromJson(TypedElementDefinition<?> column, String setter, String columnType, String javaMemberName, JavaWriter out) {
         if(isType(columnType, LocalDateTime.class)){
