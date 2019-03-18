@@ -35,7 +35,7 @@ public class Generator extends ClassicReactiveVertxGenerator{
             return true;
         }
         else if(isType(columnType, Point.class)){
-            out.tab(2).println("json.put(\"%s\",%s()==null?null:%s().toJson());", getJsonKeyName(column),getter,getter);
+            out.tab(2).println("json.put(\"%s\",%s()==null?null:%s().toType());", getJsonKeyName(column),getter,getter);
         } 
         return super.handleCustomTypeToJson(column, getter, columnType, javaMemberName, out);
     }
