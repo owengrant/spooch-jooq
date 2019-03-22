@@ -5,17 +5,18 @@
  */
 package io.pet.spooch.jooq;
 
-import io.github.jklingsporn.vertx.jooq.generate.classic.ClassicReactiveVertxGenerator;
+import io.github.jklingsporn.vertx.jooq.generate.classic.ClassicAsyncVertxGenerator;
 import io.pet.spooch.jooq.types.Point;
 import org.jooq.codegen.JavaWriter;
 import org.jooq.meta.TypedElementDefinition;
+
 import java.time.LocalDateTime;
 
 /**
  *
  * @author Owen Grant
  */
-public class Generator extends ClassicReactiveVertxGenerator{
+public class Generator extends ClassicAsyncVertxGenerator {
      @Override
     protected boolean handleCustomTypeFromJson(TypedElementDefinition<?> column, String setter, String columnType, String javaMemberName, JavaWriter out) {
         if(isType(columnType, LocalDateTime.class)){
@@ -24,7 +25,7 @@ public class Generator extends ClassicReactiveVertxGenerator{
         }
         else if(isType(columnType, Point.class)){
             out.tab(2).println("%s(json.getJsonArray(\"%s\")==null?null:new Point(json.getJsonArray(\"%s\")));", setter, javaMemberName, javaMemberName);
-        } 
+        }
         return super.handleCustomTypeFromJson(column, setter, columnType, javaMemberName, out);
     }
 
@@ -36,7 +37,7 @@ public class Generator extends ClassicReactiveVertxGenerator{
         }
         else if(isType(columnType, Point.class)){
             out.tab(2).println("json.put(\"%s\",%s()==null?null:%s().toType());", getJsonKeyName(column),getter,getter);
-        } 
+        }
         return super.handleCustomTypeToJson(column, getter, columnType, javaMemberName, out);
     }
 }
